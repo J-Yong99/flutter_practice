@@ -39,7 +39,7 @@ class MyAppState extends State<MyApp> {
                         });
                       }),
                   FloatingActionButton(
-                      child: Icon(Icons.minimize),
+                      child: Icon(Icons.remove),
                       onPressed: () {
                         setState(() {
                           counter--;
