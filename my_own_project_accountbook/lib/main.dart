@@ -1,26 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:my_own_project_accountbook/secondpage.dart';
+
+import 'page/clothes.dart';
+import 'page/food.dart';
+import 'page/life.dart';
+import 'page/transport.dart';
 
 void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+class Person {
+  String? name;
+  Person(name);
+}
 
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       initialRoute: '/',
-      routes: {'/': (context) => MainPage(), '/s': (context) => SecondPage()},
+      routes: {
+        '/': (context) => MainPage(),
+        '/f': (context) => Food(),
+        '/c': (context) => Clothes(),
+        '/l': (context) => Life(),
+        '/t': (context) => Transport()
+      },
       title: 'account book',
     );
   }
 }
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
-
   @override
   _MainPageState createState() => _MainPageState();
 }
@@ -47,247 +58,279 @@ class _MainPageState extends State<MainPage> {
         actions: [
           IconButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/s');
+                Navigator.pushNamed(context, '/');
               },
               icon: Icon(Icons.home))
         ],
       ),
       drawer: Drawer(
           child: ListView(
-        padding: EdgeInsets.zero,
+        scrollDirection: Axis.vertical,
         children: [
-          UserAccountsDrawerHeader(
-              accountName: Text('accountName'),
-              accountEmail: Text('accountEmail'))
+          ListTile(
+            leading: Icon(Icons.fastfood),
+            title: Text('Food'),
+            trailing: Icon(Icons.navigate_next),
+            onTap: () async {
+              final res = await Navigator.pushNamed(context, '/f');
+              print('$res');
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.people),
+            title: Text('Clothes'),
+            trailing: Icon(Icons.navigate_next),
+            onTap: () {
+              Navigator.pushNamed(context, '/c');
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.wb_sunny),
+            title: Text('Life'),
+            trailing: Icon(Icons.navigate_next),
+            onTap: () {
+              Navigator.pushNamed(context, '/l');
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.directions_transit),
+            title: Text('Transport'),
+            trailing: Icon(Icons.navigate_next),
+            onTap: () {
+              Navigator.pushNamed(context, '/t');
+            },
+          )
         ],
       )),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 299.7,
-                  width: 205.7,
-                  //margin: EdgeInsets.fromLTRB(4, 20, 4, 20),
-                  color: Colors.grey[600],
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        'Food',
-                        style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.black,
-                        ),
-                      ),
-                      Container(
-                        height: 35.0,
-                        width: 150.0,
-                        // color: Colors.grey[350],
-                        child: TextButton(
-                          autofocus: true,
-                          style: TextButton.styleFrom(
-                            primary: Colors.black,
-                            backgroundColor: Colors.grey[350],
-                            elevation: 0.0,
-                            minimumSize: Size(200, 100),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 299.7,
+                    width: 205.7,
+                    //margin: EdgeInsets.fromLTRB(4, 20, 4, 20),
+                    color: Colors.grey[600],
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          'Food',
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.black,
                           ),
-                          onPressed: () {},
-                          child: Text('$food',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 20,
-                              )),
                         ),
-                      ),
-                      Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            IconButton(
-                              onPressed: () {
-                                setState(() async {
-                                  await inputNumber(context);
-                                  food += tmp;
-                                });
-                              },
-                              icon: Icon(Icons.add),
-                              iconSize: 60.0,
-                              color: Colors.white,
+                        Container(
+                          height: 35.0,
+                          width: 150.0,
+                          // color: Colors.grey[350],
+                          child: TextButton(
+                            autofocus: true,
+                            style: TextButton.styleFrom(
+                              primary: Colors.black,
+                              backgroundColor: Colors.grey[350],
+                              elevation: 0.0,
+                              minimumSize: Size(200, 100),
                             ),
-                            IconButton(
-                              onPressed: () {
-                                setState(() async {
-                                  await inputNumber(context);
-                                  food -= tmp;
-                                });
-                              },
-                              icon: Icon(Icons.remove),
-                              iconSize: 60.0,
-                              color: Colors.black,
-                            )
-                          ])
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 299.7,
-                  width: 205.7,
-                  //margin: EdgeInsets.fromLTRB(4, 20, 4, 20),
-                  color: Colors.grey[400],
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        'Clothes',
-                        style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.black,
+                            onPressed: () {},
+                            child: Text('$food',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 20,
+                                )),
+                          ),
                         ),
-                      ),
-                      Column(
-                        //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        //mainAxisSize: MainAxisSize.max,
-                        children: [
-                          Container(
-                            height: 35.0,
-                            width: 150.0,
-                            // color: Colors.grey[350],
-                            child: TextButton(
-                              autofocus: true,
-                              style: TextButton.styleFrom(
-                                primary: Colors.black,
-                                backgroundColor: Colors.grey[350],
-                                elevation: 0.0,
-                                minimumSize: Size(200, 100),
+                        Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  setState(() async {
+                                    await inputNumber(context);
+                                    food += tmp;
+                                  });
+                                },
+                                icon: Icon(Icons.add),
+                                iconSize: 60.0,
+                                color: Colors.white,
                               ),
-                              onPressed: () {},
-                              child: Text('$clothes',
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    color: Colors.black54,
-                                    fontSize: 20,
-                                  )),
+                              IconButton(
+                                onPressed: () {
+                                  setState(() async {
+                                    await inputNumber(context);
+                                    food -= tmp;
+                                  });
+                                },
+                                icon: Icon(Icons.remove),
+                                iconSize: 60.0,
+                                color: Colors.black,
+                              )
+                            ])
+                      ],
+                    ),
+                  ),
+                  Container(
+                    height: 299.7,
+                    width: 205.7,
+                    //margin: EdgeInsets.fromLTRB(4, 20, 4, 20),
+                    color: Colors.grey[400],
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          'Clothes',
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Column(
+                          //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          //mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Container(
+                              height: 35.0,
+                              width: 150.0,
+                              // color: Colors.grey[350],
+                              child: TextButton(
+                                autofocus: true,
+                                style: TextButton.styleFrom(
+                                  primary: Colors.black,
+                                  backgroundColor: Colors.grey[350],
+                                  elevation: 0.0,
+                                  minimumSize: Size(200, 100),
+                                ),
+                                onPressed: () {},
+                                child: Text('$clothes',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.black54,
+                                      fontSize: 20,
+                                    )),
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 100.0,
-                            width: 10.0,
-                          ),
-                          Text(
-                            '80%',
-                            style: TextStyle(
-                              fontSize: 25,
-                              color: Colors.black,
+                            SizedBox(
+                              height: 100.0,
+                              width: 10.0,
                             ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 299.7,
-                  width: 205.7,
-                  //margin: EdgeInsets.fromLTRB(4, 20, 4, 20),
-                  color: Colors.grey[400],
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        'Life',
-                        style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.black,
-                        ),
-                      ),
-                      Container(
-                        height: 35.0,
-                        width: 150.0,
-                        // color: Colors.grey[350],
-                        child: TextButton(
-                          autofocus: true,
-                          style: TextButton.styleFrom(
-                            primary: Colors.black,
-                            backgroundColor: Colors.grey[350],
-                            elevation: 0.0,
-                            minimumSize: Size(200, 100),
-                          ),
-                          onPressed: () {
-                            setState(() async {
-                              await inputNumber(context);
-
-                              life = tmp;
-                            });
-                          },
-                          child: Text('$life',
-                              textAlign: TextAlign.center,
+                            Text(
+                              '80%',
                               style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 20,
-                              )),
+                                fontSize: 25,
+                                color: Colors.black,
+                              ),
+                            )
+                          ],
                         ),
-                      )
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-                Container(
-                  height: 299.7,
-                  width: 205.7,
-                  //margin: EdgeInsets.fromLTRB(4, 20, 4, 20),
-                  color: Colors.grey[600],
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Text(
-                        'Transport',
-                        style: TextStyle(
-                          fontSize: 30,
-                          color: Colors.black,
-                        ),
-                      ),
-                      Container(
-                        height: 35.0,
-                        width: 150.0,
-                        // color: Colors.grey[350],
-                        child: TextButton(
-                          autofocus: true,
-                          style: TextButton.styleFrom(
-                            primary: Colors.black,
-                            backgroundColor: Colors.grey[350],
-                            elevation: 0.0,
-                            minimumSize: Size(200, 100),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 299.7,
+                    width: 205.7,
+                    //margin: EdgeInsets.fromLTRB(4, 20, 4, 20),
+                    color: Colors.grey[400],
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          'Life',
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.black,
                           ),
-                          onPressed: () {
-                            setState(() async {
-                              await inputNumber(context);
-
-                              transport = tmp;
-                            });
-                          },
-                          child: Text('$transport',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 20,
-                              )),
                         ),
-                      )
-                    ],
+                        Container(
+                          height: 35.0,
+                          width: 150.0,
+                          // color: Colors.grey[350],
+                          child: TextButton(
+                            autofocus: true,
+                            style: TextButton.styleFrom(
+                              primary: Colors.black,
+                              backgroundColor: Colors.grey[350],
+                              elevation: 0.0,
+                              minimumSize: Size(200, 100),
+                            ),
+                            onPressed: () {
+                              setState(() async {
+                                await inputNumber(context);
+
+                                life = tmp;
+                              });
+                            },
+                            child: Text('$life',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 20,
+                                )),
+                          ),
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            )
-          ],
+                  Container(
+                    height: 299.7,
+                    width: 205.7,
+                    //margin: EdgeInsets.fromLTRB(4, 20, 4, 20),
+                    color: Colors.grey[600],
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Text(
+                          'Transport',
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.black,
+                          ),
+                        ),
+                        Container(
+                          height: 35.0,
+                          width: 150.0,
+                          // color: Colors.grey[350],
+                          child: TextButton(
+                            autofocus: true,
+                            style: TextButton.styleFrom(
+                              primary: Colors.black,
+                              backgroundColor: Colors.grey[350],
+                              elevation: 0.0,
+                              minimumSize: Size(200, 100),
+                            ),
+                            onPressed: () {
+                              setState(() async {
+                                await inputNumber(context);
+
+                                transport = tmp;
+                              });
+                            },
+                            child: Text('$transport',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 20,
+                                )),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -324,6 +367,7 @@ class _MainPageState extends State<MainPage> {
     });
   }
 
+  void loading() {}
   // Widget button(Color? col, String type, BuildContext context, int cost) {
   //   return Container(
   //     height: 330.7,
