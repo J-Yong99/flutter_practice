@@ -9,15 +9,21 @@ void main() {
   runApp(MyApp());
 }
 
-class Person {
-  String? name;
-  Person(name);
+enum Inout { In, Out }
+
+class Money {
+  Inout inorout;
+  String? date;
+  String? memo;
+  String? cost;
+  Money(this.inorout, this.date, this.cost, this.memo);
 }
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       initialRoute: '/',
       routes: {
         '/': (context) => MainPage(),
@@ -36,13 +42,16 @@ class MainPage extends StatefulWidget {
   _MainPageState createState() => _MainPageState();
 }
 
+num clothes = 0;
+num food = 0;
+
+num life = 0;
+num transport = 0;
+
 class _MainPageState extends State<MainPage> {
   int cost = 0;
   int tmp = 0;
-  int food = 0;
-  int clothes = 0;
-  int life = 0;
-  int transport = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -126,53 +135,44 @@ class _MainPageState extends State<MainPage> {
                             color: Colors.black,
                           ),
                         ),
-                        Container(
-                          height: 35.0,
-                          width: 150.0,
-                          // color: Colors.grey[350],
-                          child: TextButton(
-                            autofocus: true,
-                            style: TextButton.styleFrom(
-                              primary: Colors.black,
-                              backgroundColor: Colors.grey[350],
-                              elevation: 0.0,
-                              minimumSize: Size(200, 100),
-                            ),
-                            onPressed: () {},
-                            child: Text('$food',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 20,
-                                )),
-                          ),
-                        ),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              IconButton(
-                                onPressed: () {
-                                  setState(() async {
-                                    await inputNumber(context);
-                                    food += tmp;
-                                  });
-                                },
-                                icon: Icon(Icons.add),
-                                iconSize: 60.0,
-                                color: Colors.white,
+                        Column(
+                          //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          //mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Container(
+                              height: 35.0,
+                              width: 150.0,
+                              // color: Colors.grey[350],
+                              child: TextButton(
+                                autofocus: true,
+                                style: TextButton.styleFrom(
+                                  primary: Colors.black,
+                                  backgroundColor: Colors.grey[350],
+                                  elevation: 0.0,
+                                  minimumSize: Size(200, 100),
+                                ),
+                                onPressed: () {},
+                                child: Text('$food',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.black54,
+                                      fontSize: 20,
+                                    )),
                               ),
-                              IconButton(
-                                onPressed: () {
-                                  setState(() async {
-                                    await inputNumber(context);
-                                    food -= tmp;
-                                  });
-                                },
-                                icon: Icon(Icons.remove),
-                                iconSize: 60.0,
+                            ),
+                            SizedBox(
+                              height: 100.0,
+                              width: 10.0,
+                            ),
+                            Text(
+                              '80%',
+                              style: TextStyle(
+                                fontSize: 25,
                                 color: Colors.black,
-                              )
-                            ])
+                              ),
+                            )
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -252,33 +252,44 @@ class _MainPageState extends State<MainPage> {
                             color: Colors.black,
                           ),
                         ),
-                        Container(
-                          height: 35.0,
-                          width: 150.0,
-                          // color: Colors.grey[350],
-                          child: TextButton(
-                            autofocus: true,
-                            style: TextButton.styleFrom(
-                              primary: Colors.black,
-                              backgroundColor: Colors.grey[350],
-                              elevation: 0.0,
-                              minimumSize: Size(200, 100),
+                        Column(
+                          //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          //mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Container(
+                              height: 35.0,
+                              width: 150.0,
+                              // color: Colors.grey[350],
+                              child: TextButton(
+                                autofocus: true,
+                                style: TextButton.styleFrom(
+                                  primary: Colors.black,
+                                  backgroundColor: Colors.grey[350],
+                                  elevation: 0.0,
+                                  minimumSize: Size(200, 100),
+                                ),
+                                onPressed: () {},
+                                child: Text('$life',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.black54,
+                                      fontSize: 20,
+                                    )),
+                              ),
                             ),
-                            onPressed: () {
-                              setState(() async {
-                                await inputNumber(context);
-
-                                life = tmp;
-                              });
-                            },
-                            child: Text('$life',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 20,
-                                )),
-                          ),
-                        )
+                            SizedBox(
+                              height: 100.0,
+                              width: 10.0,
+                            ),
+                            Text(
+                              '80%',
+                              style: TextStyle(
+                                fontSize: 25,
+                                color: Colors.black,
+                              ),
+                            )
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -297,33 +308,44 @@ class _MainPageState extends State<MainPage> {
                             color: Colors.black,
                           ),
                         ),
-                        Container(
-                          height: 35.0,
-                          width: 150.0,
-                          // color: Colors.grey[350],
-                          child: TextButton(
-                            autofocus: true,
-                            style: TextButton.styleFrom(
-                              primary: Colors.black,
-                              backgroundColor: Colors.grey[350],
-                              elevation: 0.0,
-                              minimumSize: Size(200, 100),
+                        Column(
+                          //mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          //mainAxisSize: MainAxisSize.max,
+                          children: [
+                            Container(
+                              height: 35.0,
+                              width: 150.0,
+                              // color: Colors.grey[350],
+                              child: TextButton(
+                                autofocus: true,
+                                style: TextButton.styleFrom(
+                                  primary: Colors.black,
+                                  backgroundColor: Colors.grey[350],
+                                  elevation: 0.0,
+                                  minimumSize: Size(200, 100),
+                                ),
+                                onPressed: () {},
+                                child: Text('$transport',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.black54,
+                                      fontSize: 20,
+                                    )),
+                              ),
                             ),
-                            onPressed: () {
-                              setState(() async {
-                                await inputNumber(context);
-
-                                transport = tmp;
-                              });
-                            },
-                            child: Text('$transport',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  color: Colors.black54,
-                                  fontSize: 20,
-                                )),
-                          ),
-                        )
+                            SizedBox(
+                              height: 100.0,
+                              width: 10.0,
+                            ),
+                            Text(
+                              '80%',
+                              style: TextStyle(
+                                fontSize: 25,
+                                color: Colors.black,
+                              ),
+                            )
+                          ],
+                        ),
                       ],
                     ),
                   ),
@@ -338,6 +360,8 @@ class _MainPageState extends State<MainPage> {
 
   Future<String?>? inputNumber(BuildContext context) async {
     TextEditingController controller = TextEditingController();
+    TextEditingController controller2 = TextEditingController();
+    TextEditingController controller3 = TextEditingController();
     await showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -346,16 +370,33 @@ class _MainPageState extends State<MainPage> {
               'Enter cost',
               textAlign: TextAlign.center,
             ),
-            content: TextField(
-              autofocus: true,
-              controller: controller,
-              decoration: InputDecoration(labelText: 'EX : 10000'),
-              keyboardType: TextInputType.number,
+            content: Column(
+              children: [
+                TextField(
+                  autofocus: true,
+                  controller: controller,
+                  decoration: InputDecoration(labelText: 'Date EX: 08/11'),
+                  keyboardType: TextInputType.number,
+                ),
+                TextField(
+                  autofocus: true,
+                  controller: controller2,
+                  decoration: InputDecoration(labelText: 'Cost EX : 10000'),
+                  keyboardType: TextInputType.number,
+                ),
+                TextField(
+                  autofocus: true,
+                  controller: controller3,
+                  decoration: InputDecoration(labelText: 'Memo'),
+                  keyboardType: TextInputType.number,
+                ),
+              ],
             ),
             actions: [
               ElevatedButton(
                   onPressed: () {
-                    Navigator.pop(context, controller.text);
+                    Navigator.pop(context,
+                        {controller.text, controller2.text, controller3.text});
                   },
                   child: Text('done'))
             ],
