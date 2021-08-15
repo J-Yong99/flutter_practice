@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'page/clothes.dart';
 import 'page/food.dart';
 import 'page/life.dart';
 import 'page/transport.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
 enum Inout { In, Out }
 
 class Money {
-  Inout inorout;
+  bool inorout;
   String? date;
   String? memo;
   String? cost;
-  Money(this.inorout, this.date, this.cost, this.memo);
+  Money(this.date, this.cost, this.memo, {this.inorout = true});
 }
 
 class MyApp extends StatelessWidget {
@@ -407,53 +410,4 @@ class _MainPageState extends State<MainPage> {
       });
     });
   }
-
-  void loading() {}
-  // Widget button(Color? col, String type, BuildContext context, int cost) {
-  //   return Container(
-  //     height: 330.7,
-  //     width: 205.7,
-  //     //margin: EdgeInsets.fromLTRB(4, 20, 4, 20),
-  //     color: col,
-  //     child: Column(
-  //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //       children: [
-  //         Text(
-  //           '$type',
-  //           style: TextStyle(
-  //             fontSize: 30,
-  //             color: Colors.black,
-  //           ),
-  //         ),
-  //         Container(
-  //           height: 35.0,
-  //           width: 150.0,
-  //           // color: Colors.grey[350],
-  //           child: TextButton(
-  //             style: TextButton.styleFrom(
-  //               primary: Colors.black,
-  //               backgroundColor: Colors.grey[350],
-  //               elevation: 0.0,
-  //               minimumSize: Size(200, 100),
-  //             ),
-  //             child: Text('$cost',
-  //                 textAlign: TextAlign.center,
-  //                 style: TextStyle(
-  //                   color: Colors.black54,
-  //                   fontSize: 20,
-  //                 )),
-  //             onPressed: () {
-  //               setState(() async {
-  //                 await inputNumber(context);
-
-  //                 cost = tmp;
-  //                 print('assasa $cost');
-  //               });
-  //             },
-  //           ),
-  //         )
-  //       ],
-  //     ),
-  //   );
-  // }
 }

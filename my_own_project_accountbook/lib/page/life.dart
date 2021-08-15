@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../main.dart';
 
 Inout _var = Inout.Out;
@@ -24,10 +25,9 @@ class _LifeState extends State<Life> {
     super.dispose();
   }
 
-  List<Money> _incomeList = [];
   Money? tmp;
   late Money tmp2;
-  List<Money> _outgoingList = [];
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -57,38 +57,30 @@ class _LifeState extends State<Life> {
         body: Stack(children: [
           TabBarView(
             children: [
-              ListView(
-                children: _incomeList
-                    .map((e) => ListTile(
-                          trailing: IconButton(
-                            icon: Icon(Icons.delete_forever),
-                            onPressed: () {
-                              setState(() {
-                                deleteList(_incomeList, e);
-                              });
-                            },
-                          ),
-                          title: Text(
-                              'in:${e.inorout},cost:${e.cost}, date:${e.date}, memo:${e.memo}'),
-                        ))
-                    .toList(),
-              ),
-              ListView(
-                children: _outgoingList
-                    .map((e) => ListTile(
-                          trailing: IconButton(
-                            icon: Icon(Icons.delete_forever),
-                            onPressed: () {
-                              setState(() {
-                                deleteList(_outgoingList, e);
-                              });
-                            },
-                          ),
-                          title: Text(
-                              'in:${e.inorout},cost:${e.cost}, date:${e.date}, memo:${e.memo}'),
-                        ))
-                    .toList(),
-              ),
+              StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('life_money_in')
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) CircularProgressIndicator();
+                    return Expanded(
+                        child: ListView(
+                            children: snapshot.data!.docs
+                                .map((doc) => _buildList(doc))
+                                .toList()));
+                  }),
+              StreamBuilder<QuerySnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection('life_money_out')
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (!snapshot.hasData) CircularProgressIndicator();
+                    return Expanded(
+                        child: ListView(
+                            children: snapshot.data!.docs
+                                .map((doc) => _buildList(doc))
+                                .toList()));
+                  }),
             ],
           ),
           Positioned(
@@ -100,17 +92,17 @@ class _LifeState extends State<Life> {
                   onPressed: () async {
                     tmp = await inputCost(context).then((value) => (value));
                     if (tmp != null) {
-                      if (tmp!.inorout == Inout.In) {
+                      if (tmp!.inorout == true) {
                         setState(() {
                           life += int.parse(tmp!.cost!);
-                          _incomeList.insert(0, tmp!);
+                          _addList(tmp!);
                         });
                       }
 
-                      if (tmp!.inorout == Inout.Out) {
+                      if (tmp!.inorout == false) {
                         setState(() {
                           life -= int.parse(tmp!.cost!);
-                          _outgoingList.insert(0, tmp!);
+                          _addList(tmp!);
                         });
                       }
                     }
@@ -121,11 +113,53 @@ class _LifeState extends State<Life> {
     );
   }
 
-  void deleteList(List<Money> mList, Money val) {
-    mList.remove(val);
+  void _addList(Money mon) {
+    if (mon.inorout == true) {
+      FirebaseFirestore.instance.collection('life_money_in').add({
+        'date': mon.date,
+        'inorout': mon.inorout,
+        'cost': mon.cost,
+        'memo': mon.memo
+      });
+    } else if (mon.inorout == false) {
+      FirebaseFirestore.instance.collection('life_money_out').add({
+        'date': mon.date,
+        'inorout': mon.inorout,
+        'cost': mon.cost,
+        'memo': mon.memo
+      });
+    }
+  }
+
+  void _deleteList(DocumentSnapshot doc) {
+    if (doc['inorout'] == true)
+      FirebaseFirestore.instance
+          .collection('life_money_in')
+          .doc(doc.id)
+          .delete();
+    else if (doc['inorout'] == false)
+      FirebaseFirestore.instance
+          .collection('life_money_out')
+          .doc(doc.id)
+          .delete();
+  }
+
+  Widget _buildList(DocumentSnapshot doc) {
+    final _money = Money(doc['date'], doc['cost'], doc['memo']);
+    return ListTile(
+        onTap: () {},
+        trailing: IconButton(
+          icon: Icon(Icons.delete_forever),
+          onPressed: () {
+            _deleteList(doc);
+          },
+        ),
+        title: Text(
+            'date:${_money.date},cost:${_money.cost},memo:${_money.memo}'));
   }
 
   Future<Money?> inputCost(BuildContext context) async {
+    late bool result;
     var tmp = await showDialog<List>(
         context: context,
         builder: (BuildContext context) {
@@ -220,8 +254,13 @@ class _LifeState extends State<Life> {
         }).then((value) {
       return value;
     });
+    if (_var == Inout.In) {
+      result = true;
+    } else {
+      result = false;
+    }
     if (tmp?[0] != null && tmp?[1] != null && tmp?[2] != null) {
-      final buf = Money(_var, tmp?[0], tmp?[1], tmp?[2]);
+      final buf = Money(tmp?[0], tmp?[1], tmp?[2], inorout: result);
       resetController(controller, controller2, controller3);
       return buf;
     }
