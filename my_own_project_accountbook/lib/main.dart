@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-
 import 'page/clothes.dart';
 import 'page/food.dart';
 import 'page/life.dart';
@@ -47,7 +46,6 @@ class MainPage extends StatefulWidget {
 
 num clothes = 0;
 num food = 0;
-
 num life = 0;
 num transport = 0;
 
@@ -312,8 +310,7 @@ class _MainPageState extends State<MainPage> {
                           ),
                         ),
                         Column(
-                          //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          //mainAxisSize: MainAxisSize.max,
+
                           children: [
                             Container(
                               height: 35.0,
