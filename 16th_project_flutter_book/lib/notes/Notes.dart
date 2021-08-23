@@ -1,10 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:scoped_model/scoped_model.dart';
+import 'NotesDBWorker.dart';
+import 'NotesList.dart';
+import 'NotesEntry.dart';
+import 'NotesModel.dart' show NotesModel, notesModel;
 
 class Notes extends StatelessWidget {
-  const Notes({Key? key}) : super(key: key);
-
+  
+  Notes() {
+    notesModel.loadData('notes', NotesDBWorker.db);
+  }
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return ScopedModel<NotesModel>(
+        model: notesModel,
+        child: ScopedModelDescendant(builder:
+            (BuildContext inContext, Widget inChild, NotesModel inModel) {
+          return IndexedStack(
+            index: inModel.stackIndex,
+            children: [NotesList(), NotesEntry()],
+          );
+        }));
   }
 }
