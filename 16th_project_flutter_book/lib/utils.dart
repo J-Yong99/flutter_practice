@@ -7,7 +7,7 @@ import 'BaseModel.dart';
 late Directory docsDir;
 
 Future selectDate(
-    BuildContext inContext, BaseModel inModel, String inDateString) async {
+    BuildContext inContext, BaseModel inModel, String? inDateString) async {
   DateTime initialDate = DateTime.now();
 
   if (inDateString != null) {
