@@ -156,56 +156,147 @@ class DefSlider extends StatelessWidget {
   }
 }
 
-//Dialog
+//alertdialog
 //
+class dialog1 extends StatelessWidget {
+  const dialog1({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      actionsPadding: EdgeInsets.all(24),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+      title: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          new Text('''Dialog Title'''),
+        ],
+      ),
+      //
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            '''Dialog Content
+                  ssdsdsadsad
+                  asdasdasdasdasdasdasdasdasd
+                  asdasdasdsad
+                  ''',
+            style: TextStyle(fontSize: 16),
+          ),
+        ],
+      ),
+      actions: [
+        SmallButton(text: "text", onPressed: () {}),
+        SmallButton(text: "text", onPressed: () {}),
+      ],
+    );
+  }
+}
+
 void dialog(BuildContext context) {
   showDialog(
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        return LayoutBuilder(
-          builder: (BuildContext context, BoxConstraints constraints) {
-            return Dialog(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(24.0)),
-                child: Expanded(
-                  child: Container(
-                    width: MediaQuery.of(context).size.width - 96,
-                    height: 232,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                          child: Text("Title", style: TextStyle(fontSize: 20)),
-                          margin: EdgeInsets.fromLTRB(24, 0, 24, 0),
-                          height: 24,
-                          width: 200,
-                        ),
-                        Container(
-                          child: Text('''Titledsd
-            sdsds
-            dsdsds''', style: TextStyle(fontSize: 20)),
-                          margin: EdgeInsets.fromLTRB(24, 0, 24, 0),
-                          height: 72,
-                          width: 280,
-                        ),
-                        Container(
-                          margin: EdgeInsets.fromLTRB(24, 0, 24, 0),
-                          child: Row(
-                            children: [
-                              SmallButton(text: "text", onPressed: () {}),
-                              SmallButton(text: "text", onPressed: () {})
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ));
-          },
+        return Padding(
+          padding: const EdgeInsets.fromLTRB(48, 0, 48, 0),
+          child: AlertDialog(
+            actionsPadding: EdgeInsets.all(0),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10.0)),
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new Text('''Dialog Title'''),
+              ],
+            ),
+            //
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  '''Dialog Content
+                  ssdsdsadsad
+                  asdasdasdasdasdasdasdasdasd
+                  asdasdasdsad
+                  ''',
+                  style: TextStyle(fontSize: 16),
+                ),
+              ],
+            ),
+            actions: [
+              SmallButton(text: "text", onPressed: () {}),
+              SmallButton(text: "text", onPressed: () {}),
+            ],
+          ),
         );
       });
 }
+
+//Dialog
+//
+// void dialog(BuildContext context) {
+//   showDialog(
+//       context: context,
+//       barrierDismissible: false,
+//       builder: (BuildContext context) {
+//         return LayoutBuilder(
+//           builder: (BuildContext context, BoxConstraints constraints) {
+//             return Column(
+//               // mainAxisSize: MainAxisSize.min,
+//               mainAxisAlignment: MainAxisAlignment.center,
+//               children: [
+//                 Dialog(
+//                     shape: RoundedRectangleBorder(
+//                         borderRadius: BorderRadius.circular(24.0)),
+//                     child: Container(
+//                       width: MediaQuery.of(context).size.width - 96,
+//                       height: 232,
+//                       child: Column(
+//                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                         children: [
+//                           Expanded(
+//                             child: Container(
+//                               alignment: Alignment.topLeft,
+//                               child:
+//                                   Text("Title", style: TextStyle(fontSize: 20)),
+//                               margin: EdgeInsets.fromLTRB(24, 24, 24, 24),
+//                               height: 24,
+//                             ),
+//                           ),
+//                           Expanded(
+//                             child: Container(
+//                               child: Text('''Titledsd
+//      sdsds
+//                                       dsdsds''',
+//                                   style: TextStyle(fontSize: 20)),
+//                               margin: EdgeInsets.fromLTRB(24, 0, 24, 0),
+//                               //height: 72,
+//                             ),
+//                           ),
+//                           Expanded(
+//                             child: Container(
+//                               margin: EdgeInsets.fromLTRB(24, 0, 24, 0),
+//                               child: Row(
+//                                 children: [
+//                                   SmallButton(text: "text", onPressed: () {}),
+//                                   SmallButton(text: "text", onPressed: () {})
+//                                 ],
+//                               ),
+//                             ),
+//                           )
+//                         ],
+//                       ),
+//                     )),
+//               ],
+//             );
+//           },
+//         );
+//       });
+// }
 
 //TextBox
 //
