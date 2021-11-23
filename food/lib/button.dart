@@ -77,8 +77,8 @@ class SmallButton extends StatelessWidget {
           style: ElevatedButton.styleFrom(
               fixedSize: Size(
                   128 <= constraints.maxWidth - 48
-                      ? 128
-                      : constraints.maxWidth - 48,
+                      ? constraints.maxWidth - 48
+                      : 128,
                   40),
               primary: BLUE_COLOR,
               shape: RoundedRectangleBorder(
@@ -201,7 +201,7 @@ void dialog(BuildContext context) {
       barrierDismissible: false,
       builder: (BuildContext context) {
         return Padding(
-          padding: const EdgeInsets.fromLTRB(48, 0, 48, 0),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
           child: AlertDialog(
             actionsPadding: EdgeInsets.all(0),
             shape: RoundedRectangleBorder(
@@ -209,7 +209,7 @@ void dialog(BuildContext context) {
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                new Text('''Dialog Title'''),
+                new Text('''나중에 분석하려면?'''),
               ],
             ),
             //
@@ -218,18 +218,16 @@ void dialog(BuildContext context) {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Text(
-                  '''Dialog Content
-                  ssdsdsadsad
-                  asdasdasdasdasdasdasdasdasd
-                  asdasdasdsad
+                  '''사진 분석은 정확한 추천에 도움이 됩니다.
+                  언제든 프로필>사진 분석에서 진행 및 변경이 가능합니다.
                   ''',
                   style: TextStyle(fontSize: 16),
                 ),
               ],
             ),
             actions: [
-              SmallButton(text: "text", onPressed: () {}),
-              SmallButton(text: "text", onPressed: () {}),
+              SmallButton(text: "취소", onPressed: () {}),
+              SmallButton(text: "건너뛰기", onPressed: () {}),
             ],
           ),
         );

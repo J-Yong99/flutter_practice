@@ -80,7 +80,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 _incrementCounter();
                 {
-                  Get.to(SecondPage());
+                  Get.to(PhotoAnalysisIntroPage());
                 }
               },
               enabled: true,
