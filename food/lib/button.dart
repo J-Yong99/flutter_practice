@@ -198,6 +198,62 @@ class dialog1 extends StatelessWidget {
 void dialog(BuildContext context) {
   showDialog(
       context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text("나중에 체크하려면?",
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.all(Radius.circular(32.0))),
+          content: Column(mainAxisSize: MainAxisSize.min, children: [
+            const Text.rich(
+              TextSpan(
+                text: "피부 상태는 정확한 추천에 도움이 됩니다. 언제든 ",
+                style: TextStyle(fontSize: 16, color: DARK_GREY_COLOR),
+                children: <TextSpan>[
+                  TextSpan(
+                      text: "프로필 > 피부 상태 체크 ",
+                      style: TextStyle(
+                          color: Colors.black, fontWeight: FontWeight.bold)),
+                  TextSpan(text: "에서 진행 및 변경이 가능합니다.")
+                ],
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+              TextButton(
+                  style: TextButton.styleFrom(
+                      primary: Colors.white,
+                      padding: const EdgeInsets.only(
+                          right: 32, left: 32, top: 8, bottom: 8),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16))),
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                  },
+                  child: const Text("취소",
+                      style: TextStyle(color: DARK_GREY_COLOR))),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: const Color(0xFF001C2A),
+                      padding: const EdgeInsets.only(
+                          right: 32, left: 32, top: 8, bottom: 8),
+                      shadowColor: Colors.grey,
+                      elevation: 10,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16))),
+                  onPressed: () {},
+                  child: const Text("건너뛰기"))
+            ])
+          ]),
+        );
+      });
+}
+
+void dialog11(BuildContext context) {
+  showDialog(
+      context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
         return Padding(

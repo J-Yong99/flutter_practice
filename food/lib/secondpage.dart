@@ -3,29 +3,9 @@ import 'package:get/get.dart';
 
 import 'button.dart';
 
-class PhotoAnalysisIntroPage extends StatefulWidget {
-  const PhotoAnalysisIntroPage({Key? key}) : super(key: key);
-
-  @override
-  State<PhotoAnalysisIntroPage> createState() => _PhotoAnalysisIntroPageState();
-}
-
-class _PhotoAnalysisIntroPageState extends State<PhotoAnalysisIntroPage> {
-  bool a = true;
-  @override
-  void initState() async {
-    // TODO: implement initState
-    super.initState();
-    await Future.delayed(Duration(milliseconds: 500));
-    this.a = false;
-  }
-
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    this.a = true;
-    super.dispose();
-  }
+class PhotoAnalysisIntroPage extends StatelessWidget {
+  PhotoAnalysisIntroPage({Key? key}) : super(key: key);
+  bool a = false;
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +37,7 @@ class _PhotoAnalysisIntroPageState extends State<PhotoAnalysisIntroPage> {
                       width: MediaQuery.of(context).size.width,
                     ),
                     Positioned(
-                        top: 92,
+                        top: 66,
                         right: 40,
                         child: Container(
                           // width: 196,
@@ -69,20 +49,18 @@ class _PhotoAnalysisIntroPageState extends State<PhotoAnalysisIntroPage> {
                             opacity: a ? 0.0 : 1.0,
                             duration: Duration(milliseconds: 2000),
                             child: Padding(
-                              padding: const EdgeInsets.all(16.0),
+                              padding: const EdgeInsets.all(12.0),
                               child: Row(
                                 children: [
-                                  Icon(
-                                    Icons.ac_unit,
-                                    size: 42,
-                                  ),
+                                  Image.asset(
+                                      'assets/images/1st-place-medal.png'),
                                   SizedBox(
                                     width: 12,
                                   ),
                                   Text(
                                     "국내 최초",
                                     style: TextStyle(
-                                        fontSize: 28,
+                                        fontSize: 25,
                                         fontWeight: FontWeight.bold),
                                   )
                                 ],
@@ -91,7 +69,7 @@ class _PhotoAnalysisIntroPageState extends State<PhotoAnalysisIntroPage> {
                           ),
                         )),
                     Positioned(
-                        top: 192,
+                        top: 170,
                         right: 80,
                         child: Container(
                           // width: 196,
@@ -100,20 +78,17 @@ class _PhotoAnalysisIntroPageState extends State<PhotoAnalysisIntroPage> {
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(16.0)),
                           child: Padding(
-                            padding: const EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(12.0),
                             child: Row(
                               children: [
-                                Icon(
-                                  Icons.ac_unit,
-                                  size: 42,
-                                ),
+                                Image.asset('assets/images/magic-wand.png'),
                                 SizedBox(
                                   width: 12,
                                 ),
                                 Text(
                                   "대규모 실데이터",
                                   style: TextStyle(
-                                      fontSize: 28,
+                                      fontSize: 25,
                                       fontWeight: FontWeight.bold),
                                 )
                               ],
@@ -122,8 +97,7 @@ class _PhotoAnalysisIntroPageState extends State<PhotoAnalysisIntroPage> {
                         )),
                     Positioned(
                         top: 488,
-                        //right: 20,
-                        left: 184,
+                        right: 20,
                         child: Container(
                           // width: 196,
                           // height: 64,
@@ -131,20 +105,18 @@ class _PhotoAnalysisIntroPageState extends State<PhotoAnalysisIntroPage> {
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(16.0)),
                           child: Padding(
-                            padding: const EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(12.0),
                             child: Row(
                               children: [
-                                Icon(
-                                  Icons.ac_unit,
-                                  size: 42,
-                                ),
+                                Image.asset(
+                                    'assets/images/smiling-face-with-sunglasses.png'),
                                 SizedBox(
                                   width: 12,
                                 ),
                                 Text(
                                   "최신 딥러닝",
                                   style: TextStyle(
-                                      fontSize: 28,
+                                      fontSize: 25,
                                       fontWeight: FontWeight.bold),
                                 )
                               ],
@@ -161,20 +133,18 @@ class _PhotoAnalysisIntroPageState extends State<PhotoAnalysisIntroPage> {
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(16.0)),
                           child: Padding(
-                            padding: const EdgeInsets.all(16.0),
+                            padding: const EdgeInsets.all(12.0),
                             child: Row(
                               children: [
-                                Icon(
-                                  Icons.ac_unit,
-                                  size: 42,
-                                ),
+                                Image.asset(
+                                    'assets/images/face-screaming-in-fear.png'),
                                 SizedBox(
                                   width: 12,
                                 ),
                                 Text(
                                   "512차원 미세 특징 분석",
                                   style: TextStyle(
-                                      fontSize: 28,
+                                      fontSize: 25,
                                       fontWeight: FontWeight.bold),
                                 )
                               ],
