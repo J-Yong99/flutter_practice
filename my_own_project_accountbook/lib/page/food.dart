@@ -94,14 +94,14 @@ class _FoodState extends State<Food> {
                     if (tmp != null) {
                       if (tmp!.inorout == true) {
                         setState(() {
-                          food += int.parse(tmp!.cost!);
+                          fModel.pay(int.parse(tmp!.cost!));
                           _addList(tmp!);
                         });
                       }
 
                       if (tmp!.inorout == false) {
                         setState(() {
-                          food -= int.parse(tmp!.cost!);
+                          fModel.pay(-int.parse(tmp!.cost!));
                           _addList(tmp!);
                         });
                       }

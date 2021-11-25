@@ -1,0 +1,6 @@
+targets:
+  $default:
+    builders:
+      artemis:
+        options:
+          # custom configuration options!

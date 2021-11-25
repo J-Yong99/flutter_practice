@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:my_own_project_accountbook/base.dart';
+import 'package:my_own_project_accountbook/model.dart';
 import 'page/clothes.dart';
 import 'page/food.dart';
 import 'page/life.dart';
@@ -45,7 +47,8 @@ class MainPage extends StatefulWidget {
 }
 
 num clothes = 0;
-num food = 0;
+Model fModel = Model('Food', 0);
+
 num life = 0;
 num transport = 0;
 
@@ -121,62 +124,7 @@ class _MainPageState extends State<MainPage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
-                    height: 299.7,
-                    width: 205.7,
-                    //margin: EdgeInsets.fromLTRB(4, 20, 4, 20),
-                    color: Colors.grey[600],
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text(
-                          'Food',
-                          style: TextStyle(
-                            fontSize: 30,
-                            color: Colors.black,
-                          ),
-                        ),
-                        Column(
-                          //mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          //mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Container(
-                              height: 35.0,
-                              width: 150.0,
-                              // color: Colors.grey[350],
-                              child: TextButton(
-                                autofocus: true,
-                                style: TextButton.styleFrom(
-                                  primary: Colors.black,
-                                  backgroundColor: Colors.grey[350],
-                                  elevation: 0.0,
-                                  minimumSize: Size(200, 100),
-                                ),
-                                onPressed: () {},
-                                child: Text('$food',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      color: Colors.black54,
-                                      fontSize: 20,
-                                    )),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 100.0,
-                              width: 10.0,
-                            ),
-                            Text(
-                              '80%',
-                              style: TextStyle(
-                                fontSize: 25,
-                                color: Colors.black,
-                              ),
-                            )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
+                  base(fModel),
                   Container(
                     height: 299.7,
                     width: 205.7,
@@ -310,7 +258,6 @@ class _MainPageState extends State<MainPage> {
                           ),
                         ),
                         Column(
-
                           children: [
                             Container(
                               height: 35.0,

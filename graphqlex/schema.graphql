@@ -1,0 +1,39 @@
+directive @cacheControl(
+  maxAge: Int
+  scope: CacheControlScope
+) on FIELD_DEFINITION | OBJECT | INTERFACE
+# Exposes a URL that specifies the behaviour of this scalar.
+directive @specifiedBy(
+  # The URL that specifies the behaviour of this scalar.
+  url: String!
+) on SCALAR
+enum CacheControlScope {
+  PUBLIC
+  PRIVATE
+}
+
+type Equipment {
+  id: String
+  used_by: String
+  count: Int
+  new_or_used: String
+}
+
+type Mutation {
+  deleteEquipment(id: String): Equipment
+  deleteSupply(id: String): Supply
+}
+
+type Query {
+  equipments: [Equipment]
+  supplies: [Supply]
+}
+
+type Supply {
+  id: String
+  team: Int
+}
+
+# The `Upload` scalar type represents a file upload.
+scalar Upload
+

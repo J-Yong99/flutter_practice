@@ -51,21 +51,18 @@ class Page extends StatelessWidget {
       appBar: AppBar(
         title: Text('provider'),
       ),
-      body: ChangeNotifierProvider(
-        create: (_) => Aaa(),
-        child: Center(
-            child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(Provider.of<Aaa>(context).aa.toString()),
-            IconButton(
-                onPressed: () {
-                  Provider.of<Aaa>(context, listen: false).add();
-                },
-                icon: Icon(Icons.ac_unit))
-          ],
-        )),
-      ),
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(Provider.of<Aaa>(context).aa.toString()),
+          IconButton(
+              onPressed: () {
+                Provider.of<Aaa>(context, listen: false).add();
+              },
+              icon: Icon(Icons.ac_unit))
+        ],
+      )),
     );
   }
 }

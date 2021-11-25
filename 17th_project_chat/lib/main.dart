@@ -29,7 +29,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (context) => EntranceProvider(), child: EntrancePage());
+    return EntrancePage();
+    // return ChangeNotifierProvider(
+    //     create: (context) => EntranceProvider(), child: EntrancePage());
   }
 }
